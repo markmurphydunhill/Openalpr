@@ -12,9 +12,10 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(25, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 camera = PiCamera()
-cameraNo = 2
+cameraNo = 1
 
-IMAGE_PATH = '/home/pi/ea7the.jpg'
+#IMAGE_PATH = '/home/pi/ea7the.jpg'
+IMAGE_PATH = '/home/pi/image.jpg'
 SECRET_KEY = 'sk_43749267edd479bca1ef9d7b'
 
 entryendpoint = 'https://serene-reef-97119.herokuapp.com/api/carEntry'
@@ -39,7 +40,7 @@ while True:
 		with open(IMAGE_PATH, 'rb') as image_file:
 		    img_base64 = base64.b64encode(image_file.read())
 
-		url = 'https://api.openalpr.com/v2/recognize_bytes?recognize_vehicle=1&country=us&secret_key=%s' % (SECRET_KEY)  #Replace 'ind' with  your country code
+		url = 'https://api.openalpr.com/v2/recognize_bytes?recognize_vehicle=1&country=us&secret_key=%s' % (SECRET_KEY)  
 		r = requests.post(url, data = img_base64)
 		#returnedresults = (json.dumps(r.json()))
 		returnedresults = (r.json())
